@@ -1,0 +1,32 @@
+{
+  "root": "packages/rds-data",
+  "sourceRoot": "packages/rds-data/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/rds-data",
+        "main": "packages/rds-data/src/index.ts",
+        "tsConfig": "packages/rds-data/tsconfig.lib.json",
+        "assets": ["packages/rds-data/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/rds-data/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/rds-data"],
+      "options": {
+        "jestConfig": "packages/rds-data/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["aws"]
+}

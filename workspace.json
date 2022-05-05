@@ -3,6 +3,7 @@
   "projects": {
     "api": "packages/api",
     "dynamo": "packages/dynamo",
-    "event-bridge": "packages/event-bridge"
+    "event-bridge": "packages/event-bridge",
+    "rds-data": "packages/rds-data"
   }
 }
