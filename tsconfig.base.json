@@ -16,7 +16,10 @@
     "baseUrl": ".",
     "paths": {
       "@overlap/serverless-tools-api": ["packages/api/src/index.ts"],
-      "@overlap/serverless-tools-dynamo": ["packages/dynamo/src/index.ts"]
+      "@overlap/serverless-tools-dynamo": ["packages/dynamo/src/index.ts"],
+      "@overlap/serverless-tools-event-bridge": [
+        "packages/event-bridge/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]

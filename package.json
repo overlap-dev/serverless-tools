@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.82.0",
+    "@aws-sdk/client-eventbridge": "^3.82.0",
     "@aws-sdk/lib-dynamodb": "^3.82.0",
     "@middy/core": "^2.5.7",
     "@middy/do-not-wait-for-empty-event-loop": "^2.5.7",
@@ -12,7 +13,8 @@
     "@middy/http-json-body-parser": "^2.5.7",
     "@middy/http-security-headers": "^2.5.7",
     "@middy/validator": "^2.5.7",
-    "json-schema-to-ts": "^2.3.0",
+    "ajv": "^8.10.0",
+    "json-schema-to-ts": "^1.6.5",
     "tslib": "^2.0.0"
   },
   "devDependencies": {

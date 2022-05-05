@@ -1,0 +1,32 @@
+{
+  "root": "packages/event-bridge",
+  "sourceRoot": "packages/event-bridge/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/event-bridge",
+        "main": "packages/event-bridge/src/index.ts",
+        "tsConfig": "packages/event-bridge/tsconfig.lib.json",
+        "assets": ["packages/event-bridge/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/event-bridge/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/event-bridge"],
+      "options": {
+        "jestConfig": "packages/event-bridge/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["aws"]
+}
