@@ -1,7 +1,7 @@
 {
   "name": "@overlap/serverless-tools-event-bridge",
   "description": "Tools and utilities for working with Event Bridge.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "commonjs",
   "repository": {
     "type": "git",
