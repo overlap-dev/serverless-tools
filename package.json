@@ -6,6 +6,13 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.82.0",
     "@aws-sdk/lib-dynamodb": "^3.82.0",
+    "@middy/core": "^2.5.7",
+    "@middy/do-not-wait-for-empty-event-loop": "^2.5.7",
+    "@middy/http-cors": "^2.5.7",
+    "@middy/http-json-body-parser": "^2.5.7",
+    "@middy/http-security-headers": "^2.5.7",
+    "@middy/validator": "^2.5.7",
+    "json-schema-to-ts": "^2.3.0",
     "tslib": "^2.0.0"
   },
   "devDependencies": {
@@ -20,6 +27,7 @@
     "@swc/core": "~1.2.143",
     "@swc/helpers": "~0.3.3",
     "@swc/jest": "0.2.15",
+    "@types/aws-lambda": "^8.10.95",
     "@types/jest": "27.0.2",
     "@types/node": "16.11.7",
     "@typescript-eslint/eslint-plugin": "~5.18.0",
