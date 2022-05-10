@@ -3,13 +3,17 @@
   "sourceRoot": "packages/api/src",
   "targets": {
     "build": {
-      "executor": "@nrwl/js:tsc",
+      "executor": "@nrwl/web:rollup",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "project": "packages/api/package.json",
         "outputPath": "dist/packages/api",
-        "main": "packages/api/src/index.ts",
+        "entryFile": "packages/api/src/index.ts",
         "tsConfig": "packages/api/tsconfig.lib.json",
-        "assets": ["packages/api/*.md"]
+        "compiler": "babel",
+        "external": ["typescript"],
+        "format": ["cjs", "esm", "umd"],
+        "assets": ["packages/api/src/README.md"]
       }
     },
     "lint": {
