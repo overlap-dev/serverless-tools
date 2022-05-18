@@ -20,7 +20,8 @@
       "@overlap/serverless-tools-event-bridge": [
         "packages/event-bridge/src/index.ts"
       ],
-      "@overlap/serverless-tools-rds-data": ["packages/rds-data/src/index.ts"]
+      "@overlap/serverless-tools-rds-data": ["packages/rds-data/src/index.ts"],
+      "@overlap/serverless-tools-s3": ["packages/s3/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -4,6 +4,7 @@
     "api": "packages/api",
     "dynamo": "packages/dynamo",
     "event-bridge": "packages/event-bridge",
-    "rds-data": "packages/rds-data"
+    "rds-data": "packages/rds-data",
+    "s3": "packages/s3"
   }
 }

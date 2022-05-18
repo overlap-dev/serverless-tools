@@ -1,0 +1,32 @@
+{
+  "root": "packages/s3",
+  "sourceRoot": "packages/s3/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/s3",
+        "main": "packages/s3/src/index.ts",
+        "tsConfig": "packages/s3/tsconfig.lib.json",
+        "assets": ["packages/s3/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/s3/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/s3"],
+      "options": {
+        "jestConfig": "packages/s3/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["aws", "s3"]
+}
