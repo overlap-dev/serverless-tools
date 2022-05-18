@@ -4,6 +4,6 @@ const { REGION } = process.env;
 
 const eventBridgeClient = new EventBridgeClient({ region: REGION });
 
-export const getDynamoDBClient = () => {
+export const getEventBridgeClient = () => {
     return eventBridgeClient;
 };

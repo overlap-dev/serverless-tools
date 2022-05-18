@@ -1,5 +1,5 @@
 import { PutEventsCommand } from '@aws-sdk/client-eventbridge';
-import { getDynamoDBClient } from './eventBridgeClient';
+import { getEventBridgeClient } from './eventBridgeClient';
 
 type PublishEventProps<T> = {
     eventBus: string;
@@ -14,7 +14,7 @@ export const publishEvent = async <T>({
     eventName,
     payload,
 }: PublishEventProps<T>) => {
-    const client = getDynamoDBClient();
+    const client = getEventBridgeClient();
 
     return client.send(
         new PutEventsCommand({
