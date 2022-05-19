@@ -1,7 +1,7 @@
 {
   "name": "@overlap/serverless-tools-api",
   "description": "Tools and utilities for working with APIGateway.",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "repository": {
     "type": "git",
     "url": "https://github.com/overlap-dev/serverless-tools",
