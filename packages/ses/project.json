@@ -1,0 +1,32 @@
+{
+  "root": "packages/ses",
+  "sourceRoot": "packages/ses/src",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/packages/ses",
+        "main": "packages/ses/src/index.ts",
+        "tsConfig": "packages/ses/tsconfig.lib.json",
+        "assets": ["packages/ses/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["packages/ses/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/packages/ses"],
+      "options": {
+        "jestConfig": "packages/ses/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["aws", "ses"]
+}
