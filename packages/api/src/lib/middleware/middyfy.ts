@@ -51,7 +51,11 @@ export const getInputSchema = ({
         required = [...required, 'body'];
         properties = {
             ...properties,
-            body: { ...bodySchema, additionalProperties: false },
+            body: {
+                ...bodySchema,
+                additionalProperties:
+                    bodySchema['additionalProperties'] ?? false,
+            },
         };
     }
 
@@ -60,7 +64,8 @@ export const getInputSchema = ({
             ...properties,
             queryStringParameters: {
                 ...querySchema,
-                additionalProperties: false,
+                additionalProperties:
+                    querySchema['additionalProperties'] ?? false,
             },
         };
 
