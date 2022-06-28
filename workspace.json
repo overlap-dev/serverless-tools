@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "api": "packages/api",
+    "cognito": "packages/cognito",
     "dynamo": "packages/dynamo",
     "event-bridge": "packages/event-bridge",
     "rds-data": "packages/rds-data",
