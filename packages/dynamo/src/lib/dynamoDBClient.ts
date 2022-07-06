@@ -10,7 +10,7 @@ const defaultTranslateConfig = {
         // Whether to automatically convert empty strings, blobs, and sets to `null`.
         convertEmptyValues: false,
         // Whether to remove undefined values while marshalling.
-        removeUndefinedValues: false,
+        removeUndefinedValues: true,
         // Whether to convert typeof object to map attribute.
         convertClassInstanceToMap: false,
     },
