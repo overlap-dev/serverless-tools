@@ -31,14 +31,17 @@ const httpErrorHandlerMiddleware = (opts = {}) => {
         }
 
         if (request.error?.expose) {
-            const body = {
-                message: request.error.message,
-                ...(request.error?.details
-                    ? { details: request.error.details }
-                    : {}),
+            const details = {
+                ...(request.error?.cause ? { ...request.error.cause } : {}),
+                ...(request.error?.details ? { ...request.error.details } : {}),
             };
 
-            request.response = normalizeHttpResponse(request.response);
+            const body = {
+                message: request.error.message,
+                ...(Object.keys(details).length ? { details: details } : {}),
+            };
+
+            request.response = normalizeHttpResponse(request);
             request.response.statusCode = request.error?.statusCode;
             request.response.body = JSON.stringify(body);
             request.response.headers['Content-Type'] =

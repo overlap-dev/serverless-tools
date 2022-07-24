@@ -12,7 +12,7 @@
         "tsConfig": "packages/api/tsconfig.lib.json",
         "compiler": "babel",
         "external": ["typescript"],
-        "format": ["cjs", "esm", "umd"],
+        "format": ["cjs", "esm"],
         "assets": ["packages/api/src/README.md"]
       }
     },

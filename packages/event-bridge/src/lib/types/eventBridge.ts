@@ -1,5 +1,3 @@
-import { FromSchema } from 'json-schema-to-ts';
-
 export type ValidEvent<T> = {
     version: string;
     id: string;
@@ -8,7 +6,7 @@ export type ValidEvent<T> = {
     account: string;
     time: string;
     region: string;
-    detail: FromSchema<T>;
+    detail: T;
 };
 
 export type ValidateEvent<T> = (
