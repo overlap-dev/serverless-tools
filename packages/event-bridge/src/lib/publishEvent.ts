@@ -5,7 +5,7 @@ type PublishEventProps<T> = {
     eventBus: string;
     source: string;
     eventName: string;
-    payload: T | any;
+    payload: T;
 };
 
 export const publishEvent = async <T>({
