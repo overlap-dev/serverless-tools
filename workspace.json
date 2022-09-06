@@ -5,6 +5,7 @@
     "cognito": "packages/cognito",
     "dynamo": "packages/dynamo",
     "event-bridge": "packages/event-bridge",
+    "mongo": "packages/mongo",
     "rds-data": "packages/rds-data",
     "s3": "packages/s3",
     "ses": "packages/ses"
