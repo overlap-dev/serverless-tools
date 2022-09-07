@@ -1,7 +1,7 @@
 {
   "name": "@overlap/serverless-tools-rds-data",
   "description": "Tools and utilities for working with the RDS Data API.",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "type": "commonjs",
   "repository": {
     "type": "git",
