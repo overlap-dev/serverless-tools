@@ -5,6 +5,7 @@ import middyJsonBodyParser from '@middy/http-json-body-parser';
 import httpSecurityHeaders from '@middy/http-security-headers';
 import validator from '@middy/validator';
 import Ajv, { Options as AjvOptions } from 'ajv';
+import addFormats from 'ajv-formats';
 import type { Handler } from 'aws-lambda';
 import httpErrorHandler from './httpErrorHandlerMiddleware';
 
@@ -99,6 +100,7 @@ const getCompiledSchemas = ({
 
     const options = Object.assign({}, ajvDefaultOptions, ajvOptions);
     const ajv = new Ajv(options);
+    addFormats(ajv);
 
     ajv.addKeyword({
         keyword: 'notEmpty',
