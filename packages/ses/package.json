@@ -1,7 +1,7 @@
 {
   "name": "@overlap/serverless-tools-ses",
   "description": "Tools and utilities for working with Amazon Simple Email Service",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "type": "commonjs",
   "repository": {
     "type": "git",

@@ -1,7 +1,7 @@
 {
   "name": "@overlap/serverless-tools-s3",
   "description": "Tools and utilities for working with S3.",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "type": "commonjs",
   "repository": {
     "type": "git",
