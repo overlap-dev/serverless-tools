@@ -33,7 +33,7 @@ describe('dynamoDBClient', () => {
         expect(docClient.config.translateConfig).toEqual({
             marshallOptions: {
                 convertEmptyValues: false,
-                removeUndefinedValues: false,
+                removeUndefinedValues: true,
                 convertClassInstanceToMap: false,
             },
             unmarshallOptions: {
