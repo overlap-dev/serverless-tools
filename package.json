@@ -1,7 +1,9 @@
 {
   "name": "serverless-tools",
   "version": "0.0.0",
-  "scripts": {},
+  "scripts": {
+    "nx": "nx"
+  },
   "private": true,
   "dependencies": {
     "@aws-sdk/client-cognito-identity-provider": "^3.180.0",

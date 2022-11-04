@@ -1,6 +1,5 @@
 name: Publish Packages to NPM
 on:
-  repository_dispatch:
   release:
     types: [published]
 
@@ -15,12 +14,8 @@ jobs:
           node-version: "16.x"
           registry-url: "https://registry.npmjs.org"
 
-      - name: Check Ref Name
-        run: |
-          echo ${{github.ref_name}}
+      - run: npm ci
 
-      # - run: npm ci
-      # - run: npm run nx -- run-many --target=publish --all
-      #   env:
-      #     NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-      #     RELEASE_VERSION: ${{ steps.releaseTag.outputs.tag }}
+      - run: npm run nx -- run-many --target=publish --all --ver=${{github.ref_name}} --tag=latest
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

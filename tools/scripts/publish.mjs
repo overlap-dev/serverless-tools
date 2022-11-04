@@ -8,9 +8,9 @@
  */
 
 import { readCachedProjectGraph } from '@nrwl/devkit';
+import chalk from 'chalk';
 import { execSync } from 'child_process';
 import { readFileSync, writeFileSync } from 'fs';
-import chalk from 'chalk';
 
 function invariant(condition, message) {
     if (!condition) {
@@ -23,10 +23,13 @@ function invariant(condition, message) {
 // Default "tag" to "next" so we won't publish the "latest" tag by accident.
 const [, , name, version, tag = 'next'] = process.argv;
 
+// clean up version input to use gitHub tags with v prefix.
+const cleanVersion = version && version.replace('v', '');
+
 // A simple SemVer validation to validate the version
 const validVersion = /^\d+\.\d+\.\d+(-\w+\.\d+)?/;
 invariant(
-    version && validVersion.test(version),
+    cleanVersion && validVersion.test(cleanVersion),
     `No version provided or version did not match Semantic Versioning, expected: #.#.#-tag.# or #.#.#, got ${version}.`,
 );
 
@@ -49,7 +52,7 @@ process.chdir(outputPath);
 // Updating the version in "package.json" before publishing
 try {
     const json = JSON.parse(readFileSync(`package.json`).toString());
-    json.version = version;
+    json.version = cleanVersion;
     writeFileSync(`package.json`, JSON.stringify(json, null, 2));
 } catch (e) {
     console.error(
