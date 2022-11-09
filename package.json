@@ -33,7 +33,7 @@
     "@nrwl/js": "14.7.17",
     "@nrwl/linter": "14.7.17",
     "@nrwl/nx-cloud": "latest",
-    "@nrwl/web": "^14.7.17",
+    "@nrwl/web": "^15.0.13",
     "@nrwl/workspace": "14.7.17",
     "@swc/cli": "~0.1.57",
     "@swc/core": "~1.3.3",
