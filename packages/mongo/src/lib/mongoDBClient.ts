@@ -23,10 +23,12 @@ export const getMongoClient = async (
     url: string,
     options?: MongoClientOptions,
 ): Promise<MongoClient> => {
-    sharedMongoClients[url] = await MongoClient.connect(
-        url,
-        Object.assign(defaultMongoClientOptions, options),
-    );
+    if (!sharedMongoClients[url]) {
+        sharedMongoClients[url] = await MongoClient.connect(
+            url,
+            Object.assign(defaultMongoClientOptions, options),
+        );
+    }
 
     return sharedMongoClients[url];
 };
