@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@overlap/serverless-tools-algolia": ["packages/algolia/src/index.ts"],
       "@overlap/serverless-tools-api": ["packages/api/src/index.ts"],
       "@overlap/serverless-tools-cognito": ["packages/cognito/src/index.ts"],
       "@overlap/serverless-tools-dynamo": ["packages/dynamo/src/index.ts"],
