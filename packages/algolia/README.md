@@ -1,11 +1,3 @@
-# algolia
+# Serverless Tools - Algolia
 
-This library was generated with [Nx](https://nx.dev).
-
-## Building
-
-Run `nx build algolia` to build the library.
-
-## Running unit tests
-
-Run `nx test algolia` to execute the unit tests via [Jest](https://jestjs.io).
+Tools and utilities for working with Algolia.
