@@ -1,5 +1,6 @@
 {
   "name": "@overlap/serverless-tools-algolia",
+  "description": "Tools and utilities for working with Algolia.",
   "version": "0.1.0",
   "type": "commonjs",
   "repository": {
