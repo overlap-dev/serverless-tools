@@ -22,6 +22,7 @@
     "@middy/validator": "^3.4.0",
     "ajv": "^8.11.0",
     "ajv-formats": "^2.1.1",
+    "algoliasearch": "^4.14.3",
     "json-schema-to-ts": "^2.5.5",
     "mongodb": "^4.9.1",
     "tslib": "^2.4.0"

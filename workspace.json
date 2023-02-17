@@ -1,6 +1,7 @@
 {
   "version": 2,
   "projects": {
+    "algolia": "packages/algolia",
     "api": "packages/api",
     "cognito": "packages/cognito",
     "dynamo": "packages/dynamo",

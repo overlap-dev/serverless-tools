@@ -1,0 +1,18 @@
+{
+  "name": "@overlap/serverless-tools-algolia",
+  "description": "Tools and utilities for working with Algolia.",
+  "version": "0.1.0",
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/overlap-dev/serverless-tools",
+    "directory": "packages/mongo"
+  },
+  "contributors": [
+    {
+      "name": "Daniel Gördes",
+      "email": "d.goerdes@overlap.at",
+      "url": "https://overlap.at"
+    }
+  ]
+}
