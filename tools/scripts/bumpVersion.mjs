@@ -9,6 +9,7 @@
 
 import { readCachedProjectGraph } from '@nrwl/devkit';
 import chalk from 'chalk';
+import { readFileSync, writeFileSync } from 'fs';
 
 function invariant(condition, message) {
     if (!condition) {
@@ -19,7 +20,7 @@ function invariant(condition, message) {
 
 // Executing publish script: node path/to/publish.mjs {name} --version {version} --tag {tag}
 // Default "tag" to "next" so we won't publish the "latest" tag by accident.
-const [, , name, version, tag = 'next'] = process.argv;
+const [, , name, version] = process.argv;
 
 // clean up version input to use gitHub tags with v prefix.
 const cleanVersion = version && version.replace('v', '');
@@ -39,13 +40,23 @@ invariant(
     `Could not find project "${name}" in the workspace. Is the project.json configured correctly?`,
 );
 
-const outputPath = project.data?.targets?.build?.options?.outputPath;
+const projectRoot = project.data?.root;
 invariant(
-    outputPath,
-    `Could not find "build.options.outputPath" of project "${name}". Is project.json configured  correctly?`,
+    projectRoot,
+    `Could not find "build.options.project" of project "${name}". Is project.json configured  correctly?`,
 );
 
-process.chdir(outputPath);
+process.chdir(projectRoot);
 
-// Execute "npm publish" to publish
-execSync(`npm publish --access public --tag ${tag}`);
+// Updating the version in "package.json"
+try {
+    const json = JSON.parse(readFileSync('package.json').toString());
+    json.version = cleanVersion;
+    writeFileSync('package.json', JSON.stringify(json, null, 2));
+} catch (e) {
+    console.error(
+        chalk.bold.red(
+            `Error reading package.json file from library "${name}".`,
+        ),
+    );
+}

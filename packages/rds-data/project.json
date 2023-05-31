@@ -12,6 +12,12 @@
         "assets": ["packages/rds-data/*.md"]
       }
     },
+    "bump": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "node tools/scripts/bumpVersion.mjs rds-data {args.ver}"
+      }
+    },
     "publish": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {

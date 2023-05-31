@@ -12,6 +12,12 @@
         "assets": ["packages/event-bridge/*.md"]
       }
     },
+    "bump": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "node tools/scripts/bumpVersion.mjs event-bridge {args.ver}"
+      }
+    },
     "publish": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {
@@ -40,5 +46,6 @@
       }
     }
   },
-  "tags": ["aws"]
+  "tags": ["aws"],
+  "implicitDependencies": ["api"]
 }

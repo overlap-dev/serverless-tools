@@ -16,6 +16,12 @@
         "assets": ["packages/api/src/README.md"]
       }
     },
+    "bump": {
+      "executor": "@nrwl/workspace:run-commands",
+      "options": {
+        "command": "node tools/scripts/bumpVersion.mjs api {args.ver}"
+      }
+    },
     "publish": {
       "executor": "@nrwl/workspace:run-commands",
       "options": {

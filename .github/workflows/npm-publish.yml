@@ -20,6 +20,7 @@ jobs:
       - run: npm run nx -- run-many --target=lint --all
       - run: npm run nx -- run-many --target=test --all --ci
 
+      - run: npm run nx -- run-many --target=bump --all --ver=${{github.ref_name}}
       - run: npm run nx -- run-many --target=publish --all --ver=${{github.ref_name}} --tag=latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
