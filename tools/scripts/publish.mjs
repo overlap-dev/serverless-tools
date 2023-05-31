@@ -9,6 +9,7 @@
 
 import { readCachedProjectGraph } from '@nrwl/devkit';
 import chalk from 'chalk';
+import { execSync } from 'child_process';
 
 function invariant(condition, message) {
     if (!condition) {
