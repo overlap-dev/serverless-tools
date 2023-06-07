@@ -157,8 +157,8 @@ export const middyfy = ({
             .use(middyJsonBodyParser())
             .use(
                 validator({
-                    inputSchema: inputValidate,
-                    outputSchema: outputValidate,
+                    eventSchema: inputValidate,
+                    responseSchema: outputValidate,
                 }),
             )
             .use(httpSecurityHeaders())
