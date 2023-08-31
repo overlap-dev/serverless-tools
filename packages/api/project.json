@@ -4,17 +4,13 @@
   "sourceRoot": "packages/api/src",
   "targets": {
     "build": {
-      "executor": "@nx/rollup:rollup",
+      "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "project": "packages/api/package.json",
         "outputPath": "dist/packages/api",
-        "entryFile": "packages/api/src/index.ts",
+        "main": "packages/api/src/index.ts",
         "tsConfig": "packages/api/tsconfig.lib.json",
-        "compiler": "babel",
-        "external": ["typescript"],
-        "format": ["cjs", "esm"],
-        "assets": ["packages/api/src/README.md"]
+        "assets": ["packages/api/*.md"]
       }
     },
     "bump": {
