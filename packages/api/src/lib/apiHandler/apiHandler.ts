@@ -12,11 +12,13 @@ export type RouteController =
 export type ApiHandlerOptions = {
     routeControllers?: Record<string, RouteController>;
     addPreflightCors?: boolean;
+    isFunctionUrl?: boolean;
 };
 
 const defaultOptions: ApiHandlerOptions = {
     routeControllers: {},
     addPreflightCors: true,
+    isFunctionUrl: false,
 };
 
 export const getApiHandler = (options?: ApiHandlerOptions) => {
@@ -36,8 +38,15 @@ export const getApiHandler = (options?: ApiHandlerOptions) => {
     ) => {
         logRequest(event);
 
+        let routeKey = event.routeKey;
+        if (opts.isFunctionUrl) {
+            routeKey = `${event.requestContext.http.method.toUpperCase()} ${
+                event.requestContext.http.path
+            }`;
+        }
+
         // Find the right controller for a route
-        const controller = routeControllers[event.routeKey];
+        const controller = routeControllers[routeKey];
 
         // Return controller result or return 404 if no controller was found.
         return controller
