@@ -26,6 +26,7 @@ type MiddyfyProps = {
     querySchema?: Record<string, any>;
     outputSchema?: Record<string, any>;
     ajvOptions?: AjvOptions;
+    corsOptions?: Record<string, any> | false;
 };
 
 const ajvDefaultOptions: AjvOptions = {
@@ -44,7 +45,7 @@ const ajvDefaultOptions: AjvOptions = {
     removeAdditional: true,
 };
 
-const corsOptions = {
+const defaultCorsOptions = {
     origin: '*',
     headers: '*',
     methods: 'OPTIONS,POST,GET,PUT,PATCH,DELETE',
@@ -139,6 +140,7 @@ export const middyfy = ({
     querySchema,
     outputSchema,
     ajvOptions,
+    corsOptions,
 }: MiddyfyProps) => {
     let inputSchema;
     if (bodySchema || querySchema) {
@@ -151,25 +153,28 @@ export const middyfy = ({
         ajvOptions,
     });
 
+    let middyfiedHandler = middy(handler)
+        .use(doNotWaitForEmptyEventLoop())
+        .use(middyJsonBodyParser());
+
     if (inputValidate || outputValidate) {
-        return middy(handler)
-            .use(doNotWaitForEmptyEventLoop())
-            .use(middyJsonBodyParser())
-            .use(
-                validator({
-                    eventSchema: inputValidate,
-                    responseSchema: outputValidate,
-                }),
-            )
-            .use(httpSecurityHeaders())
-            .use(cors(corsOptions))
-            .use(httpErrorHandler());
+        middyfiedHandler = middyfiedHandler.use(
+            validator({
+                eventSchema: inputValidate,
+                responseSchema: outputValidate,
+            }),
+        );
     }
 
-    return middy(handler)
-        .use(doNotWaitForEmptyEventLoop())
-        .use(middyJsonBodyParser())
-        .use(httpSecurityHeaders())
-        .use(cors(corsOptions))
-        .use(httpErrorHandler());
+    middyfiedHandler = middyfiedHandler.use(httpSecurityHeaders());
+
+    if (corsOptions !== false) {
+        middyfiedHandler = middyfiedHandler.use(
+            cors(corsOptions ?? defaultCorsOptions),
+        );
+    }
+
+    middyfiedHandler = middyfiedHandler.use(httpErrorHandler());
+
+    return middyfiedHandler;
 };
