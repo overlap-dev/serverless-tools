@@ -3,19 +3,19 @@ import {
     APIGatewayProxyStructuredResultV2,
     Handler,
 } from 'aws-lambda';
-import { FromSchema, JSONSchema7 } from 'json-schema-to-ts';
+import { FromSchema, JSONSchema } from 'json-schema-to-ts';
 
 export type ValidatedHttpApiProxyEvent<
-    TBody extends JSONSchema7,
-    TQuery extends JSONSchema7,
+    TBody extends JSONSchema,
+    TQuery extends JSONSchema,
 > = Omit<APIGatewayProxyEventV2, 'body' | 'queryStringParameters'> & {
     body: FromSchema<TBody>;
     queryStringParameters: FromSchema<TQuery>;
 };
 
 export type HttpApiEventHandler<
-    TBody extends JSONSchema7,
-    TQuery extends JSONSchema7,
+    TBody extends JSONSchema,
+    TQuery extends JSONSchema,
 > = Handler<
     ValidatedHttpApiProxyEvent<TBody, TQuery>,
     APIGatewayProxyStructuredResultV2
