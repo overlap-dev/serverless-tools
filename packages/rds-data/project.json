@@ -31,18 +31,14 @@
       ]
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["packages/rds-data/**/*.ts"]
-      }
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/packages/rds-data"],
       "options": {
-        "jestConfig": "packages/rds-data/jest.config.js",
-        "passWithNoTests": true
+        "jestConfig": "packages/rds-data/jest.config.js"
       }
     }
   },

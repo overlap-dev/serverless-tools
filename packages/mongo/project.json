@@ -32,18 +32,14 @@
       ]
     },
     "lint": {
-      "executor": "@nx/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["packages/mongo/**/*.ts"]
-      }
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
     },
     "test": {
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/packages/mongo"],
       "options": {
-        "jestConfig": "packages/mongo/jest.config.ts",
-        "passWithNoTests": true
+        "jestConfig": "packages/mongo/jest.config.ts"
       }
     }
   },
