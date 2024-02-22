@@ -2,6 +2,8 @@ name: Checks (Lint, Test, Build)
 
 on:
   pull_request:
+  push:
+    branches: ["main"]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
