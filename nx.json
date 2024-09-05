@@ -24,9 +24,6 @@
     }
   },
   "extends": "@nx/workspace/presets/core.json",
-  "affected": {
-    "defaultBase": "main"
-  },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "sharedGlobals": [],
@@ -38,5 +35,6 @@
       "!{projectRoot}/jest.config.[jt]s"
     ]
   },
-  "nxCloudAccessToken": "MWJiYmY2OTUtMjQzYi00YzY3LWFjOWMtYjUxNDgzODY2MGRjfHJlYWQtd3JpdGU="
+  "nxCloudAccessToken": "MWJiYmY2OTUtMjQzYi00YzY3LWFjOWMtYjUxNDgzODY2MGRjfHJlYWQtd3JpdGU=",
+  "defaultBase": "main"
 }

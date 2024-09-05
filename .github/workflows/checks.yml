@@ -20,7 +20,7 @@ jobs:
       - uses: nrwl/nx-set-shas@v2
       - uses: actions/setup-node@v3
         with:
-          node-version: "18.x"
+          node-version: "20.x"
           cache: "npm"
 
       - run: npm ci
