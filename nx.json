@@ -35,6 +35,6 @@
       "!{projectRoot}/jest.config.[jt]s"
     ]
   },
-  "nxCloudAccessToken": "MWJiYmY2OTUtMjQzYi00YzY3LWFjOWMtYjUxNDgzODY2MGRjfHJlYWQtd3JpdGU=",
+  "useNxCloud": false,
   "defaultBase": "main"
 }
