@@ -54,7 +54,7 @@ export const getApiHandler = (options?: ApiHandlerOptions) => {
             : middyfy({
                   handler: async () =>
                       formatJSONResponse(404, { message: 'Not Found' }),
-              })(event, context, callback);
+              })(event, context);
     };
 
     return apiHandler;
