@@ -153,9 +153,11 @@ export const middyfy = ({
         ajvOptions,
     });
 
-    let middyfiedHandler = middy(handler)
-        .use(doNotWaitForEmptyEventLoop())
-        .use(middyJsonBodyParser());
+    let middyfiedHandler = middy(handler).use(doNotWaitForEmptyEventLoop());
+
+    if (bodySchema) {
+        middyfiedHandler = middyfiedHandler.use(middyJsonBodyParser());
+    }
 
     if (inputValidate || outputValidate) {
         middyfiedHandler = middyfiedHandler.use(
