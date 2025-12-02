@@ -1,7 +1,5 @@
-import algoliasearch, {
-    AlgoliaSearchOptions,
-    SearchClient,
-} from 'algoliasearch';
+import { ClientOptions } from '@algolia/client-common';
+import { algoliasearch, SearchClient } from 'algoliasearch';
 
 const sharedAlgoliaClients: Record<string, SearchClient> = {};
 
@@ -10,7 +8,7 @@ const defaultClientOptions = {};
 export const getAlgoliaSearchClient = (
     appId: string,
     apiKey: string,
-    options?: AlgoliaSearchOptions,
+    options?: ClientOptions,
 ): SearchClient => {
     const cacheKey = `${appId}_${apiKey}`;
 
