@@ -12,6 +12,7 @@
     "@aws-sdk/client-rds-data": "^3.929.0",
     "@aws-sdk/client-s3": "^3.929.0",
     "@aws-sdk/client-ses": "^3.929.0",
+    "@aws-sdk/client-sesv2": "^3.971.0",
     "@aws-sdk/lib-dynamodb": "^3.929.0",
     "@aws-sdk/s3-request-presigner": "^3.929.0",
     "@middy/core": "^6.4.5",
