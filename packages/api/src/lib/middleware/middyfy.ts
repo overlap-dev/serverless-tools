@@ -162,8 +162,12 @@ export const middyfy = ({
     if (inputValidate || outputValidate) {
         middyfiedHandler = middyfiedHandler.use(
             validator({
-                eventSchema: inputValidate,
-                responseSchema: outputValidate,
+                // @middy/validator v7 mistypes these as `Ajv` but the runtime
+                // invokes them as compiled `ValidateFunction`s (see its index.js:
+                // `await eventSchema(request.event)`, `eventSchema.errors`).
+                // Remove when middy fixes their type declarations.
+                eventSchema: inputValidate as any,
+                responseSchema: outputValidate as any,
             }),
         );
     }
