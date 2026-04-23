@@ -4,7 +4,7 @@ import cors from '@middy/http-cors';
 import middyJsonBodyParser from '@middy/http-json-body-parser';
 import httpSecurityHeaders from '@middy/http-security-headers';
 import validator from '@middy/validator';
-import Ajv, { Options as AjvOptions } from 'ajv';
+import Ajv, { type Options as AjvOptions, type ValidateFunction } from 'ajv';
 import addFormats from 'ajv-formats';
 import type { Handler } from 'aws-lambda';
 import httpErrorHandler from './httpErrorHandlerMiddleware';
@@ -96,8 +96,8 @@ const getCompiledSchemas = ({
     outputSchema,
     ajvOptions,
 }: GetCompiledSchemaProps) => {
-    let inputValidate = null;
-    let outputValidate = null;
+    let inputValidate: ValidateFunction | null = null;
+    let outputValidate: ValidateFunction | null = null;
 
     const options = Object.assign({}, ajvDefaultOptions, ajvOptions);
     const ajv = new Ajv(options);
@@ -160,15 +160,26 @@ export const middyfy = ({
     }
 
     if (inputValidate || outputValidate) {
+        // `@middy/validator` mistypes `eventSchema`/`responseSchema` as `Ajv`,
+        // but at runtime it invokes them as compiled `ValidateFunction`s (see
+        // its `index.js`: `await eventSchema(request.event)` and
+        // `eventSchema.errors`). We build the options object with real
+        // `ValidateFunction` types and cast only at this boundary.
+        const validatorOptions: {
+            eventSchema?: ValidateFunction;
+            responseSchema?: ValidateFunction;
+        } = {};
+        if (inputValidate) {
+            validatorOptions.eventSchema = inputValidate;
+        }
+        if (outputValidate) {
+            validatorOptions.responseSchema = outputValidate;
+        }
+
         middyfiedHandler = middyfiedHandler.use(
-            validator({
-                // @middy/validator v7 mistypes these as `Ajv` but the runtime
-                // invokes them as compiled `ValidateFunction`s (see its index.js:
-                // `await eventSchema(request.event)`, `eventSchema.errors`).
-                // Remove when middy fixes their type declarations.
-                eventSchema: inputValidate as any,
-                responseSchema: outputValidate as any,
-            }),
+            validator(
+                validatorOptions as unknown as Parameters<typeof validator>[0],
+            ),
         );
     }
 
