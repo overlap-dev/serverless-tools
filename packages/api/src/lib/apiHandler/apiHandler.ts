@@ -1,12 +1,48 @@
 import { MiddyfiedHandler } from '@middy/core';
-import { APIGatewayProxyEventV2, Context, Handler } from 'aws-lambda';
+import {
+    APIGatewayProxyEventV2,
+    APIGatewayProxyResultV2,
+    Context,
+} from 'aws-lambda';
 import { formatJSONResponse } from '../formatJsonResponse';
 import { logRequest } from '../logRequest';
 import { middyfy } from '../middleware';
 import { preflightCors } from './preflightCors';
 
+/**
+ * The result a `RouteController` may return.
+ *
+ * Mirrors what API Gateway / Lambda Function URL accept: either a structured
+ * proxy result (status code, headers, body, ...) or a plain string body.
+ */
+export type RouteControllerResult = APIGatewayProxyResultV2;
+
+/**
+ * A function-style route controller.
+ *
+ * Notes:
+ * - The signature is intentionally restricted to **2 parameters**. AWS Lambda's
+ *   Node.js 24 runtime rejects handlers whose `.length === 3` and which are
+ *   not declared `async` (`Runtime.CallbackHandlerDeprecated`). Disallowing
+ *   the 3rd `callback` parameter at the type level prevents that footgun.
+ * - `event` is typed as `any` on purpose: route controllers are commonly
+ *   produced by `HttpApiEventHandler<TBody, TQuery>`, which narrows `event`
+ *   to a `ValidatedHttpApiProxyEvent`. Because function parameters are
+ *   contravariant, a narrower-event handler can't be assigned to a wider-event
+ *   parameter type — so we accept `any` here and let each controller declare
+ *   its own precise event shape.
+ */
+export type RouteControllerFn = (
+    event: any,
+    context: Context,
+) => Promise<RouteControllerResult> | RouteControllerResult;
+/**
+ * Anything that can be registered as a route controller in
+ * {@link ApiHandlerOptions.routeControllers}: either a plain async function or
+ * a middy-wrapped handler.
+ */
 export type RouteController =
-    | Handler
+    | RouteControllerFn
     | MiddyfiedHandler<any, any, Error, Context>;
 
 export type ApiHandlerOptions = {
@@ -31,11 +67,10 @@ export const getApiHandler = (options?: ApiHandlerOptions) => {
         ...opts.routeControllers,
     };
 
-    const apiHandler: Handler<APIGatewayProxyEventV2> = async (
-        event,
-        context,
-        callback,
-    ) => {
+    const apiHandler = async (
+        event: APIGatewayProxyEventV2,
+        context: Context,
+    ): Promise<RouteControllerResult> => {
         logRequest(event);
 
         let routeKey = event.routeKey;
@@ -50,7 +85,7 @@ export const getApiHandler = (options?: ApiHandlerOptions) => {
 
         // Return controller result or return 404 if no controller was found.
         return controller
-            ? controller(event, context, callback)
+            ? controller(event, context)
             : middyfy({
                   handler: async () =>
                       formatJSONResponse(404, { message: 'Not Found' }),
