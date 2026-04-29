@@ -36,5 +36,6 @@
     ]
   },
   "useNxCloud": false,
-  "defaultBase": "main"
+  "defaultBase": "main",
+  "analytics": false
 }
