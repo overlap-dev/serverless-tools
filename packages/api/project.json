@@ -3,7 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/api/src",
   "targets": {
-    "build": {
+    "build-ts": {
       "executor": "@nx/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
@@ -12,6 +12,14 @@
         "tsConfig": "packages/api/tsconfig.lib.json",
         "assets": ["packages/api/*.md"]
       }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "outputs": ["{workspaceRoot}/dist/packages/api"],
+      "options": {
+        "command": "node tools/scripts/bundle-api.mjs"
+      },
+      "dependsOn": ["build-ts"]
     },
     "bump": {
       "executor": "nx:run-commands",
