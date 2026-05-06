@@ -42,12 +42,7 @@ invariant(
     `Could not find project "${name}" in the workspace. Is the project.json configured correctly?`,
 );
 
-const buildTarget = project.data?.targets?.build;
-const outputPathFromOptions = buildTarget?.options?.outputPath;
-const outputPathFromOutputs = buildTarget?.outputs?.[0];
-const outputPath =
-    outputPathFromOptions ??
-    normalizeOutputPath(outputPathFromOutputs, project.data?.root);
+const outputPath = project.data?.targets?.build?.options?.outputPath;
 invariant(
     outputPath,
     `Could not find "build.options.outputPath" of project "${name}". Is project.json configured  correctly?`,
@@ -57,19 +52,3 @@ process.chdir(outputPath);
 
 // Execute "npm publish" to publish
 execSync(`npm publish --access public --tag ${tag}`);
-
-function normalizeOutputPath(outputEntry, projectRoot) {
-    if (typeof outputEntry !== 'string' || outputEntry.length === 0) {
-        return undefined;
-    }
-
-    if (outputEntry.startsWith('{workspaceRoot}/')) {
-        return outputEntry.replace('{workspaceRoot}/', '');
-    }
-
-    if (outputEntry.startsWith('{projectRoot}/') && projectRoot) {
-        return `${projectRoot}/${outputEntry.replace('{projectRoot}/', '')}`;
-    }
-
-    return outputEntry;
-}
