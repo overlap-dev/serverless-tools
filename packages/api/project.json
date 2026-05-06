@@ -17,6 +17,7 @@
       "executor": "nx:run-commands",
       "outputs": ["{workspaceRoot}/dist/packages/api"],
       "options": {
+        "outputPath": "dist/packages/api",
         "command": "node tools/scripts/bundle-api.mjs"
       },
       "dependsOn": ["build-ts"]
