@@ -11,21 +11,21 @@ const inputFile = join(distDir, 'src/index.js');
 const packageJsonPath = join(distDir, 'package.json');
 
 const bundle = await rollup({
-  input: inputFile,
-  external: () => false,
-  plugins: [nodeResolve({ preferBuiltins: true }), commonjs(), json()],
+    input: inputFile,
+    external: () => false,
+    plugins: [nodeResolve({ preferBuiltins: true }), commonjs(), json()],
 });
 
 await bundle.write({
-  file: join(distDir, 'index.esm.js'),
-  format: 'esm',
-  sourcemap: true,
+    file: join(distDir, 'index.esm.js'),
+    format: 'esm',
+    sourcemap: true,
 });
 
 await bundle.write({
-  file: join(distDir, 'index.cjs.js'),
-  format: 'cjs',
-  sourcemap: true,
+    file: join(distDir, 'index.cjs.js'),
+    format: 'cjs',
+    sourcemap: true,
 });
 
 await bundle.close();
@@ -36,13 +36,13 @@ packageJson.main = './index.cjs.js';
 packageJson.module = './index.esm.js';
 packageJson.types = './src/index.d.ts';
 packageJson.exports = {
-  '.': {
-    types: './src/index.d.ts',
-    require: './index.cjs.js',
-    import: './index.esm.js',
-    default: './index.cjs.js',
-  },
-  './package.json': './package.json',
+    '.': {
+        types: './src/index.d.ts',
+        require: './index.cjs.js',
+        import: './index.esm.js',
+        default: './index.cjs.js',
+    },
+    './package.json': './package.json',
 };
 delete packageJson.type;
 
