@@ -3,6 +3,7 @@ import doNotWaitForEmptyEventLoop from '@middy/do-not-wait-for-empty-event-loop'
 import cors from '@middy/http-cors';
 import middyJsonBodyParser from '@middy/http-json-body-parser';
 import httpSecurityHeaders from '@middy/http-security-headers';
+import type { SecurityHeadersOptions } from './embeddableResourceSecurityHeaders';
 import validator from '@middy/validator';
 import Ajv, { type Options as AjvOptions, type ValidateFunction } from 'ajv';
 import addFormats from 'ajv-formats';
@@ -27,6 +28,7 @@ type MiddyfyProps = {
     outputSchema?: Record<string, any>;
     ajvOptions?: AjvOptions;
     corsOptions?: Record<string, any> | false;
+    securityHeadersOptions?: SecurityHeadersOptions;
 };
 
 const ajvDefaultOptions: AjvOptions = {
@@ -141,6 +143,7 @@ export const middyfy = ({
     outputSchema,
     ajvOptions,
     corsOptions,
+    securityHeadersOptions,
 }: MiddyfyProps) => {
     let inputSchema;
     if (bodySchema || querySchema) {
@@ -183,7 +186,9 @@ export const middyfy = ({
         );
     }
 
-    middyfiedHandler = middyfiedHandler.use(httpSecurityHeaders());
+    middyfiedHandler = middyfiedHandler.use(
+        httpSecurityHeaders(securityHeadersOptions),
+    );
 
     if (corsOptions !== false) {
         middyfiedHandler = middyfiedHandler.use(
