@@ -186,7 +186,9 @@ export const middyfy = ({
         );
     }
 
-    middyfiedHandler = middyfiedHandler.use(httpSecurityHeaders(securityHeadersOptions));
+    middyfiedHandler = middyfiedHandler.use(
+        httpSecurityHeaders(securityHeadersOptions),
+    );
 
     if (corsOptions !== false) {
         middyfiedHandler = middyfiedHandler.use(
